@@ -40,19 +40,19 @@ ylabel('y(m)')
 hold off
 
 %----------------------------------------
-d_all_BS = zeros(19,50);
+d_nearest_BS = zeros(19,50);
 
 for i =1:19
     for j = 1:50
-        d_all_BS(i,j) = sqrt( (xq(i,j)- x_BS(i) )^2 + (yq(i,j) - y_BS(i) )^2 );
+        d_nearest_BS(i,j) = sqrt( (xq(i,j)- x_BS(i) )^2 + (yq(i,j) - y_BS(i) )^2 );
     end
 end
 
-BS_RCpower = g_of_d(BSheight, MSheight , d_all_BS).*GT.*GR.*MSpower;
+BS_RCpower = g_of_d(BSheight, MSheight , d_nearest_BS).*GT.*GR.*MSpower;
 BS_RCpower_db = linear_to_db(BS_RCpower);
 
 
-figure,plot(d_all_BS , BS_RCpower_db ,'o'); %received power in dB
+figure,plot(d_nearest_BS , BS_RCpower_db ,'o'); %received power in dB
 xlabel('distance(m)');  
 ylabel('received power(dB)')  
 title('figure B-2');  
@@ -74,7 +74,7 @@ total_power = repmat(total_power , 1 ,50);
 I = total_power - BS_RCpower;
 
 N = repmat(N,19,50);
-figure,plot(d_all_BS , mySINR(BS_RCpower ,N , I),'o'); %SINR in dB
+figure,plot(d_nearest_BS , mySINR(BS_RCpower ,N , I),'o'); %SINR in dB
 xlabel('distance(m)');  
 ylabel('SINR(dB)')  
 title('figure B-3'); 
