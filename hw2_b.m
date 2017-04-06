@@ -52,19 +52,19 @@ BS_RCpower = g_of_d(BSheight, MSheight , d_nearest_BS).*GT.*GR.*MSpower;
 BS_RCpower_db = linear_to_db(BS_RCpower);
 
 
-figure,plot(d_nearest_BS , BS_RCpower_db ,'o'); %received power in dB
+figure,plot(d_nearest_BS , BS_RCpower_db ,'bo'); %received power in dB
 xlabel('distance(m)');  
 ylabel('received power(dB)')  
 title('figure B-2');  
 
 %calculate interference from 19*50-1 points
-xq_temp = reshape(xq,1,19*50);
-yq_temp = reshape(yq,1,19*50);
+xq_temp = reshape(xq ,1,19*50);
+yq_temp = reshape(yq ,1,19*50);
 d = zeros(19,19*50);
 my_power = zeros(19,50);
 for i=1:19
     for j =1:19*50
-        d(i,j) =  sqrt( (xq_temp(j)- x_BS(i) )^2 + (yq_temp(j) - y_BS(i) )^2 );
+        d(i,j) =  sqrt( (xq_temp(j)- x_BS(i) )^2 + ( yq_temp(j) - y_BS(i) )^2 );
     end
 end
 
@@ -74,7 +74,7 @@ total_power = repmat(total_power , 1 ,50);
 I = total_power - BS_RCpower;
 
 N = repmat(N,19,50);
-figure,plot(d_nearest_BS , mySINR(BS_RCpower ,N , I),'o'); %SINR in dB
+figure,plot(d_nearest_BS , mySINR(BS_RCpower ,N , I),'bo'); %SINR in dB
 xlabel('distance(m)');  
 ylabel('SINR(dB)')  
 title('figure B-3'); 
