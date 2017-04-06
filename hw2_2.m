@@ -20,7 +20,20 @@ y_BS =         [-1000, -750, -750, -500,-500, -500, -250, -250, 0  , 0  , 250, 2
 %location of other 18 BS
 
 [xv,yv,xq,yq]=get_cell(0,0);
-draw_hex(xv,yv,xq,yq , 'figure 2-1');
+
+figure
+
+plot(xv,yv) % polygon
+axis equal
+
+hold on
+plot(0,0,'k*') % points inside
+plot(xq,yq,'ro') % points inside
+title('figure 2-1')
+xlabel('x(m)')
+ylabel('y(m)')
+hold off
+
 
 d_central_BS = sqrt( (xq-0).^2+(yq-0).^2 );
 BS_RCpower = g_of_d(BSheight, MSheight , d_central_BS).*GT.*GR.*MSpower;
